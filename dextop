@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # dependencies /////////////////////////////////////////////////////////////////
 
 if [[ -z $(command -v frobulator) ]]
@@ -429,7 +431,7 @@ dextop_intent () {
 
 	# load dextop deployment script
 
-	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
+	frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/dextop "${HOME}"/.local/bin dextop
 
 	frobulator.cpt "Complete" "[ Update // Dextop ]"
 	echo
@@ -460,11 +462,11 @@ utility_intent () {
 	then
 		if [[ ${utilities_list[@]} =~ "${utility}" ]]
 		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
+			frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/ "${HOME}"/.local/bin "${utility}"
 
 		elif [[ "${utility}" = "all" ]]
 		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+			frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/ "${HOME}"/.local/bin ${utilities_list[@]}
 
 		else
 			frobulator.err "Unknown utility name" "[ '${utility}' ]"
@@ -496,7 +498,7 @@ utility_intent () {
 		echo
 
 	else
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/ "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
 
 	utilities_list=()
@@ -689,7 +691,7 @@ additions_intent () {
 		dextop-additions
 	)
 
-	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+	frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/ "${HOME}"/.local/bin ${additions_list[@]}
 
 	additions_list=()
 
@@ -708,7 +710,7 @@ backgrounds_intent () {
 		dextop-grey.svg
 	)
 
-	frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+	frobulator.download https://raw.githubusercontent.com/kstenerud/dextop/main/ "${HOME}"/.dextop ${backgrounds_list[@]}
 
 	backgrounds_list=()
 }
